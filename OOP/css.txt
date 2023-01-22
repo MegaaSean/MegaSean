@@ -1,0 +1,226 @@
+body, html{
+    margin:0;
+    height:100%;
+    color:#ae00ff;
+  }
+  
+  .page{
+    flex:1 1 auto;
+    position:relative;
+    width:100%;
+    height:100%;
+    overflow: hidden;
+  }
+  
+  .window._active{
+    display:block;
+  }
+  /*Окно приложения*/
+  .window{
+    display:none;
+    width:500px;
+    height:390px;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    bottom: 60px;
+    margin: auto;
+    border: 1px solid rgb(247, 0, 255);
+    box-shadow: 1px 5px 10px 5px #b20ed3;
+  }
+  .window_menu{
+    left: 50px;
+  }
+  .main-window{
+    width:100%;
+    height:100%;
+    position: relative;
+    bottom: 0;
+    left: 0;
+  }
+  .main-window .menu{
+    display: flex;
+  }
+  .main-window .menu button{
+    background-color: transparent;
+    border: none;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    margin-left: 15px;
+  }
+  .main-window .menu button:hover{
+    color:rgb(247, 0, 255);
+  }
+  @media(max-width:750px){
+    .window{
+      margin:50px 30px;
+    }
+  }
+  
+  .window._fullscreen{
+    max-width:100%;
+    height:100%;
+    margin:0;
+    width: 100%;
+    bottom: 0;
+    right:0;
+    left:0;
+  }
+  
+  /*Строка инструментов приложения*/
+  .window__toolbar{
+    background-color:#000000;
+    height:35px;
+    display:flex;
+    justify-content:space-between;
+    cursor: default;
+    color:rgb(204, 0, 255);
+  }
+  nav p{
+    margin:0;
+    padding-left:10px;
+    font-size:18px;
+    line-height:31px;
+  }
+  .panel{
+    display:flex;
+    align-items:center;
+  }
+  hr{
+    border:none;
+    cursor:pointer;
+    width:50px;
+    height:100%;
+    position:relative;
+    margin:0;
+  }
+  .escape:after{
+    content:"";
+    position:absolute;
+    top:0; bottom:0;
+    left:0; right:0;
+    margin:auto;
+    width:9px;
+    height:5px;
+    border-bottom:1px solid white;
+  }
+  .fullscreen:after{
+    content:"";
+    position:absolute;
+    top:0; bottom:0;
+    left:0; right:0;
+    margin:auto;
+    width:10px;
+    height:7px;
+    border:1px solid white;
+  }
+  .close:after{
+    content:"";
+    position:absolute;
+    top:0; bottom:0;
+    left:0; right:0;
+    margin:auto;
+    width:13px;
+    height:2px;
+    transform:rotate(-45deg);
+    border-bottom:1px solid white;
+  }
+  .close:before{
+    content:"";
+    position:absolute;
+    top:0; bottom:0;
+    left:1px; right:0;
+    margin:auto;
+    width:10px;
+    height:1px;
+    transform:rotate(45deg);
+    border-bottom:1px solid white;
+  }
+  hr:hover{
+    background-color:#b20ed3;
+  }
+  .close:hover{
+    background-color:red;
+  }
+  
+  /*Контент приложения*/
+  .window__body{
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .main-window .window__body{
+    padding:50px 10px 10px 10px;
+    line-height:26px;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    text-align:center;
+  }
+  .buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .window__body button{
+    font-size: 15px;
+    line-height:28px;
+    background-color:#0F1117;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    cursor:pointer;
+    border: 2px solid transparent;
+    margin-top: 10px;
+    width: 400px;
+  }
+  button:hover{
+    background-color:transparent;
+    border: 2px solid #0F1117;
+    color:#ff00ff;
+  }
+  .table{
+    border-collapse: collapse;
+    position: relative;
+  }
+  th,
+  td{
+    border: 1px solid black;
+    padding: 5px;
+  }
+  th{
+    cursor: default;
+  }
+  tr{
+    cursor: pointer;
+  }
+  .department{
+    bottom: 50px;
+    left: 30px;
+  }
+  .project{
+    left: 60px;
+    bottom: 40px;
+  }
+  .dialogue{
+    max-width:400px;
+    height:200px;
+    text-align:center;
+    bottom: 100px;
+    right: 50px;
+    z-index: 1;
+  }
+  .dialogue input{
+    width: 300px;
+    height: 30px;
+    border: 2px solid #0F1117;
+    border-radius: 5px;
+    font-size: 14px;
+    color:rgb(0, 0, 0);
+    padding: 0 10px;
+  }
+  .dialogue input::placeholder{
+    color:#0F1117;
+  }
+  .dialogue button{
+    width: 200px;
+  }

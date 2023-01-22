@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IT-компания</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <div class="window main-window _active">
+      <nav class="window__toolbar">
+        <div class="menu">
+          <p>Курсовая</p>
+          <button class="open-panel">Открыть меню</button>
+          <button class="save">Сохранить в файл</button>
+          <button class="download">Загрузить из файла</button>
+        </div>
+        <div class="panel">
+          <hr class="escape">
+          <hr class="fullscreen">
+          <hr class="close">
+        </div>
+      </nav>
+      <div class="window__body">
+        <table class="table table_company">
+          <thead>
+            <tr>
+              <th colspan="3">Тур-фирма: <span></span></th>
+            </tr>
+            <tr>
+              <th>Имя клиента</th>
+              <th>Колличество поездок</th>
+              <th>Стоимость поездок</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+        <table class="table table_department">
+          <thead>
+            <tr>
+              <th colspan="3">Клиент: <span></span></th>
+            </tr>
+            <tr>
+              <th>Дата поездки</th>
+              <th>Стоимость поездки</th>
+              <th>Время поездки</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="window window_menu company _active">
+      <nav class="window__toolbar">
+        <p>Курсовая</p>
+        <div class="panel">
+          <hr class="escape">
+          <hr class="fullscreen">
+          <hr class="close">
+        </div>
+      </nav>
+      <div class="window__body">
+        <h2 class="title">Управление Тур-фирмой</h2>
+        <div class="buttons">
+          <button onclick="companySetName()">Изменить название Тур-фирмы</button> <!--События нажатия-->
+          <button onclick="addDepartment()">Добавить клиента</button>
+          <button onclick="deleteDepartment()">Удалить последнего клиента</button>
+          <button onclick="shiftAllKlients()">Сдвинуть клиентов</button>
+          <button onclick="countFinance()">Подсчет общей стоимости поездок</button>
+          <button onclick="chooseDepartment()">Выбрать клиента</button>
+        </div>
+      </div>
+    </div>
+    <div class="window window_menu department">
+      <nav class="window__toolbar">
+        <p>Курсовая</p>
+        <div class="panel">
+          <hr class="escape">
+          <hr class="fullscreen">
+          <hr class="close">
+        </div>
+      </nav>
+      <div class="window__body">
+        <h2 class="title">Управление клиентом</h2>
+        <div class="buttons">
+          <button onclick="departmentSetName()">Изменить имя клиента</button> <!--События нажатия-->
+          <button onclick="addProject()">Добавить поездку</button>
+          <button onclick="deleteProject()">Удалить поездку</button>
+          <button onclick="chooseProject()">Выбрать поездку</button>
+        </div>
+      </div>
+    </div>
+    <div class="window window_menu project">
+      <nav class="window__toolbar">
+        <p>Курсовая</p>
+        <div class="panel">
+          <hr class="escape">
+          <hr class="fullscreen">
+          <hr class="close">
+        </div>
+      </nav>
+      <div class="window__body">
+        <h2 class="title">Управление поездкой</h2>
+        <div class="buttons">
+          <button onclick="projectSetName()">Изменить дату поездки</button>
+          <button onclick="setFinance()">Изменить стоимость поездки</button>
+          <button onclick="setTime()">Изменить время поездки</button>
+        </div>
+      </div>
+    </div>
+    <div class="window dialogue dialogue_input _active">
+      <nav class="window__toolbar">
+        <p>Курсовая</p>
+        <div class="panel">
+          <hr class="escape">
+          <hr class="fullscreen">
+          <hr class="close">
+        </div>
+      </nav>
+      <form action="#" class="window__body dialogue__form">
+        <p class="label">Введите название Тур-фирмы</p>
+        <input name="answer" type="text" class="input" placeholder="Введите значение">
+        <button class="button" type="submit">Далее</button>
+      </form>
+    </div>
+    <div class="window dialogue dialogue_input-number">
+      <nav class="window__toolbar">
+        <p>Курсовая</p>
+        <div class="panel">
+          <hr class="escape">
+          <hr class="fullscreen">
+          <hr class="close">
+        </div>
+      </nav>
+      <form action="#" class="window__body dialogue__form-number">
+        <p class="label">Введите название Тур-фирмы</p>
+        <input name="answer" type="number" class="input" placeholder="Введите значение">
+        <button class="button" type="submit">Далее</button>
+      </form>
+    </div>
+    <div class="window dialogue dialogue_output">
+      <nav class="window__toolbar">
+        <p>Курсовая</p>
+        <div class="panel">
+          <hr class="escape">
+          <hr class="fullscreen">
+          <hr class="close">
+        </div>
+      </nav>
+      <div class="window__body">
+        <p class="label">Вывод</p>
+        <p></p>
+      </div>
+    </div>
+  </main>
+  <!--Присоединение модулей-->
+  <script src="Trip.js"></script>
+  <script src="Klient.js"></script>
+  <script src="TurFirma.js"></script>
+  <script src="demo.js"></script>
+</body>
+</html>

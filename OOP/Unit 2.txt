@@ -1,0 +1,147 @@
+class Klient{
+    constructor(klientName){
+        this._klientName = klientName  //имя клиента
+        this._tail = null
+        this._head = new Trip()
+    }
+    getKlientName(){  //вывод имени клиента
+        return this._klientName
+    }
+
+    setKlientName(newKlientName){
+        this._klientName = newKlientName
+        alert('Имя клиента изменено')
+    }
+
+    addTrip(newDataTrip){  //добавление поезки клиенту
+        if(this._head.next != null){
+            let newDep = new Trip(newDataTrip)
+            if(this._tail.getDataTrip()<=newDep.getDataTrip()){
+                this._tail.next = newDep
+                this._tail = this._tail.next
+            }else{
+                let pHead = this._head
+                let pTemp = this._head.next
+                while(pTemp != null){
+                    if(pTemp.getDataTrip()>newDep.getDataTrip()){
+                        newDep.next = pTemp
+                        pHead. next = newDep
+                        break
+                    }
+                    pHead = pHead.next
+                    pTemp = pTemp.next
+                }
+            }
+        }else{
+            this._head.next = new Trip(newDataTrip)
+            this._tail = this._head.next
+        }
+    }
+
+    deleteTrip(dataTrip){  //удаление поездки у клиента
+        if(this._head.next == null){
+            alert('Ошибка. Список пуст')
+        }
+        let deleteHead = null
+        while(this._head.next && this._head.next.getDataTrip() === dataTrip){
+            deleteHead = this._head.next
+            this._head.next = this._head.next.next
+        }
+        let currentTail = this._head.next
+        if(currentTail !== null){
+            while(currentTail.next){
+                if(currentTail.next.getDataTrip() === dataTrip){
+                    deleteHead = currentTail.next
+                    currentTail.next = currentTail.next.next
+                }else{
+                    currentTail = currentTail.next
+                }
+            }
+        }
+        if(this._tail && this._tail.getDataTrip() === dataTrip){
+            this._tail = currentTail
+        }
+    }
+
+    costPriceKlientTrip(){  //суммарная стоимость поездок у клиента
+    let sum = 0
+    let pTemp = this._head.next
+        while(pTemp != null){
+            sum += Number(pTemp.getPriceTrip()) 
+            pTemp = pTemp.next
+        }
+        return sum
+    }
+
+    costCountKlientTrip(){  //суммарное кол-во поездок у клиента
+        let count = 0
+        let pTemp = this._head.next
+        while(pTemp != null){
+            count++
+            pTemp = pTemp.next
+        }
+        return count
+    }
+
+    getInfoKlient(){  //вывод информации об этом клиенте
+        let res = ''
+        let count = 0
+        let sum = 0
+        let pTemp = this._head.next
+        while(pTemp != null){
+            res += `Поездка ${pTemp.getDataTrip()}\n`
+            count++
+            sum += pTemp.getPriceTrip()
+            pTemp = pTemp.next
+        }
+        return `${this._klientName}\n\n${res}Cуммарное количество поездок ${count}\nСуммарная стоимость поездок ${sum}`
+    }
+
+    searchTrip(dataTrip){  //поиск поездки у клиента
+        let pTemp = this._head.next
+        while(pTemp != null){
+            if(dataTrip === pTemp.getDataTrip()){
+                return pTemp
+            }
+            pTemp = pTemp.next
+        }
+    }
+
+    getHead(){  //метод доступа к заголовку
+        return this._head
+    }
+
+    chooseTrip(dataTrip){
+        let activMenu = true
+        function Menu(currentMenu){
+            switch(Number(prompt('Выберите пунск меню:\n1)Вывести дату поездки\n2)Вывести время поездки\n3)Изменить время поездки\n4)Вывести стоимость поездки\n5)Изменить стоимость поездки\n6)Вывести всю информацию\n7)Назад'))){
+                case 1:alert(currentMenu.getDataTrip())
+                       break
+                case 2:alert(currentMenu.getTimeTrip())
+                       break
+                case 3:currentMenu.setTimeTrip(Number(prompt('Введите время поездки в часах')))
+                       break
+                case 4:alert(currentMenu.getPriceTrip())
+                       break
+                case 5:currentMenu.setPriceTrip(Number(prompt('Введите стоимость поездки в рублях')))
+                       break
+                case 6:alert(currentMenu.getInfoTrip())
+                       break
+                case 7:activMenu = false
+                       break
+                default:alert('Введено непонятное значение') 
+                       break        
+            }
+        }
+        if(this._head != null){
+            let currentMenu = this.searchTrip(dataTrip)
+            if(dataTrip){
+                while(activMenu){Menu(currentMenu)}
+            }else{
+                alert('Поездка не найдена')
+            } 
+        }else{
+            alert('Поездок нет')
+        }
+    }
+} 

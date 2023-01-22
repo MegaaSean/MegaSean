@@ -1,0 +1,41 @@
+class Trip{
+    constructor(dataTrip, timeTrip, priceTrip){
+        this._dataTrip = dataTrip
+        this._timeTrip = timeTrip
+        this._priceTrip = priceTrip
+    }
+
+    getDataTrip(){  //Вывод даты поездки
+        return this._dataTrip
+        //`Поездка состоялась ${this._dataTrip} числа`
+    }
+
+    setDataTrip(newDataTrip){  //ввод даты поездки в переменную newDataTrip 
+        this._dataTrip = newDataTrip
+        output('Дата поездки изменена')
+    }
+
+    getTimeTrip(){  //вывод времени поездки
+        return this._timeTrip
+        //`Поездка заняла ${this._timeTrip} часа`
+    }
+
+    setTimeTrip(newTimeTrip){  //ввод времени поездки в переменную newTimeTrip
+        this._timeTrip = newTimeTrip
+        output('Время поездки изменено')
+    }
+
+    getPriceTrip(){  //вывод стоимости поездки
+        return this._priceTrip
+        //`Поездка обошлась в ${this._priceTrip} рубля(-ей)`
+    }
+
+    setPriceTrip(newPriceTrip){  //ввод стоимости поездки в переменную newPriceTrip
+        this._priceTrip = newPriceTrip
+        output('Стоимость поезки изменена')
+    }
+
+    getInfoTrip(){  //вывод информации о поездке целиком
+        return `Поездка ${this._dataTrip} числа в ${this._timeTrip}.\nСтоимость поездки ${this._priceTrip}`
+    }
+}

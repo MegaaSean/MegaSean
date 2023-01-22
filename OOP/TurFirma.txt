@@ -1,0 +1,98 @@
+class TurFirma{
+    constructor(turName){
+        this._turName = turName  //Название ТурФирмы
+        this._klients = []  //динамический массив с будущими клиентами
+        this._first = 0  //первый элемент массива
+        this._last = 0  //последний элемент массива
+    }
+
+    getTurName(){  //вывод названия ТурФирмы
+        output(`${this._turName}`)
+    }
+
+    setTurName(newTurName){  //ввести название ТурФирмы в переменную newTurName
+        this._turName = newTurName
+        
+    }
+
+    pushKlient(newKlientName){  //Добавить клиента в конец массива с переменной newKlientName
+        if(this._klients.length == 0){
+            this._klients[this._first] = new Klient(newKlientName)
+            this._klients[this._last] = this._klients[this._first]
+        }else{
+            this._last++
+            this._klients[this._last] = new Klient(newKlientName)
+        }
+    }
+
+    popKlient(){  //удалить клиента из начала массива
+        if(this._klients.length == 0){
+            output('Клиентов нет')
+        }else{
+            this._klients.pop()
+            this._last--
+        }
+    }
+
+    shiftKlients(){  //сдвиг клиентов в массиве на 1 шаг
+        for(let j=0;j<1;j++){
+            let tmp = this._klients[this._klients.length-1]
+            for (let i=this._klients.length-1;i>0;i--){
+                this._klients[i] = this._klients[i-1]
+            }
+            this._klients[0] = tmp
+        }
+    }
+
+    InfoTurFirma(){  //вывод клиентов на экран с полной информацией
+        let result = ''
+        for(let el of this._klients){
+            result += el.getInfoKlient()
+        }
+        return result
+    }
+
+    searchKlient(klientName){  //поиск клиента
+        for(let el of this._klients){
+            if(klientName === el.getKlientName()){
+                return this._klients.indexOf(el)
+            }
+        }
+    }
+
+    costPriceTrip(){  //суммарная стоимость поездок
+        let sum = 0
+        for(let el of this._klients){
+            sum += el.costPriceKlientTrip()
+        }
+        return sum
+    }
+    
+    costCountTrip(){  //суммарное кол-во поездок
+        let count = 0
+        for(let el of this._klients){
+            count += el.costCountKlientTrip()
+        }
+        return count
+    }
+
+    get getKlients(){
+        return this._klients
+    }
+
+    getFirst(){
+        return this._klients[this._first]
+    }
+
+    getLast(){
+        return this._klients[this._last]
+    }
+
+    chooseKlient(klientName){
+        for(let el of this._klients){
+            if(klientName == el.getKlientName()){
+                return el
+            }
+        }
+    }
+}

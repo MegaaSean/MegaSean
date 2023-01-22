@@ -1,0 +1,158 @@
+class TurFirma{
+    constructor(turName){
+        this._turName = turName  //Название ТурФирмы
+        this._klients = []  //динамический массив с будущими клиентами
+        this._first = 0
+        this._last = 0
+    }
+
+    getTurName(){  //вывод названия ТурФирмы
+        return this._turName
+    }
+
+    setTurName(newTurName){  //ввести название ТурФирмы в переменную newTurName
+        this._turName = newTurName
+        alert('Название фирмы изменено')
+    }
+
+    pushKlient(newKlientName){  //Добавить клиента в конец массива с переменной newKlientName
+        if(this._klients.length == 0){
+            this._klients[this._first] = new Klient(newKlientName)
+            this._klients[this._last] = this._klients[this._first]
+        }else{
+            this._last++
+            this._klients[this._last] = new Klient(newKlientName)
+        }
+    }
+
+    popKlient(){  //удалить клиента из начала массива
+        if(this._klients.length == 0){
+            alert('Клиентов нет')
+        }else{
+            this._klients.pop()
+            this._last--
+        }
+    }
+
+    shiftKlients(step){  //сдвиг клиентов в массиве на step шагов
+        for(let j=0;j<step;j++){
+            let tmp = this._klients[this._klients.length-1]
+            for (let i=this._klients.length-1;i>0;i--){
+                this._klients[i] = this._klients[i-1]
+            }
+            this._klients[0] = tmp
+        }
+    }
+
+    InfoTurFirma(){  //вывод клиентов на экран с полной информацией
+        let result = ''
+        for(let el of this._klients){
+            result += el.getInfoKlient()
+        }
+        return result
+    }
+
+    searchKlient(klientName){  //поиск клиента
+        for(let el of this._klients){
+            if(klientName === el.getKlientName()){
+                return this._klients.indexOf(el)
+            }
+        }
+    }
+
+    costPriceTrip(){  //суммарная стоимость поездок
+        let sum = 0
+        for(let el of this._klients){
+            sum += el.costPriceKlientTrip()
+        }
+        return sum
+    }
+    
+    costCountTrip(){  //суммарное кол-во поездок
+        let count = 0
+        for(let el of this._klients){
+            count += el.costCountKlientTrip()
+        }
+        return count
+    }
+
+    getKlients(){
+        return this._klients
+    }
+
+    getFirst(){
+        return this._klients[this._first]
+    }
+
+    getLast(){
+        return this._klients[this._last]
+    }
+
+    chooseKlient(klientName){
+        let activMenu = true
+        function Menu(currentMenu){
+            switch(Number(prompt('Выберите пунск меню:\n1)Вывести имя клиента\n2)Изменить имя клиента\n3)Добавить поездку\n4)Удалить поездку\n5)Вывести стоимость поездок\n6)Вывести количество поездок\n7)Вывести всю информацию\n8)Выбрать поездку\n9)Назад'))){
+                case 1:alert(currentMenu.getKlientName())
+                       break
+                case 2:currentMenu.setKlientName(prompt('Введите новое имя клиента'))
+                       break
+                case 3:currentMenu.addTrip(Number(prompt('Введите дату поездки')))
+                       break
+                case 4:currentMenu.deleteTrip(Number(prompt('Введите дату поездки')))
+                       break
+                case 5:alert(currentMenu.costPriceKlientTrip())
+                       break
+                case 6:alert(currentMenu.costCountKlientTrip())
+                       break
+                case 7:alert(currentMenu.getInfoKlient())
+                       break
+                case 8:currentMenu.chooseTrip(Number(prompt('Введите дату поездки')))
+                       break
+                case 9:activMenu = false
+                       break
+                default:alert('Введено непонятное значение') 
+                       break        
+            }
+        }
+        if(this._klients.length > 0){
+            let index = this.searchKlient(klientName)
+            let currentMenu = this._klients[index]
+            if(currentMenu){
+                while(activMenu){Menu(currentMenu)}
+            }else{
+                alert('Клиент не найден')
+            } 
+        }else{
+            alert('клиентов нет')
+        }
+    }
+}
+let turFir = new TurFirma('Перевозчики')
+let activMenu = true
+function Menu(){
+    switch(Number(prompt('Выберите пунск меню:\n1)Изменить название Тур-фирмы\n2)Вывести название Тур-фирмы\n3)Добавить клиента\n4)Удалить клиента\n5)Сдвинуть клиентов на step шагов\n6)Суммарное количество поездок\n7)Суммарная стоимость поездок\n8)Вывести информацию о Тур-фирме\n9)Выбрать клиента\n10)Выход'))){
+        case 1:turFir.setTurName(prompt('Введите название Тур-фирмы'))
+                break
+        case 2:alert(turFir.getTurName())
+                break
+        case 3:turFir.pushKlient(prompt('Введите имя клиента'))
+                break
+        case 4:turFir.pop()
+                break
+        case 5:turFir.shiftKlients(Number(prompt('Введите количество шагов для сдвига')))
+                break
+        case 6:alert(turFir.costCountTrip())
+                break
+        case 7:alert(turFir.costPriceTrip())
+                break
+        case 8:alert(turFir.InfoTurFirma())
+                break
+        case 9:turFir.chooseKlient(prompt('Введите имя клиента для работы с ним'))
+                break
+        case 10:activMenu = false
+                break
+        default:alert('Введено непонятное значение') 
+                break        
+    }
+}
+while(activMenu){Menu()}

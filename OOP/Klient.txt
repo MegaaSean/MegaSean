@@ -1,0 +1,149 @@
+class Klient{
+    constructor(klientName){
+        this._klientName = klientName  //имя клиента
+        this._tail = null
+        this._head = new Trip()
+    }
+    getKlientName(){  //вывод имени клиента
+        return this._klientName
+    }
+
+    setKlientName(newKlientName){
+        this._klientName = newKlientName
+    }
+
+    addTrip(newDataTrip){  //добавление поезки клиенту
+        if(this._head.next != null){
+            let newDep = new Trip(newDataTrip)
+            if(this._tail.getDataTrip()<=newDep.getDataTrip()){
+                this._tail.next = newDep
+                this._tail = this._tail.next
+            }else{
+                let pHead = this._head
+                let pTemp = this._head.next
+                while(pTemp != null){
+                    if(pTemp.getDataTrip()>newDep.getDataTrip()){
+                        newDep.next = pTemp
+                        pHead. next = newDep
+                        break
+                    }
+                    pHead = pHead.next
+                    pTemp = pTemp.next
+                }
+            }
+        }else{
+            this._head.next = new Trip(newDataTrip)
+            this._tail = this._head.next
+        }
+    }
+
+    deleteTrip(dataTrip){  //удаление поездки у клиента
+        if(this._head.next == null){
+            alert('Ошибка. Список пуст')
+        }
+        let deleteHead = null
+        while(this._head.next && this._head.next.getDataTrip() === dataTrip){
+            deleteHead = this._head.next
+            this._head.next = this._head.next.next
+        }
+        let currentTail = this._head.next
+        if(currentTail !== null){
+            while(currentTail.next){
+                if(currentTail.next.getDataTrip() === dataTrip){
+                    deleteHead = currentTail.next
+                    currentTail.next = currentTail.next.next
+                }else{
+                    currentTail = currentTail.next
+                }
+            }
+        }
+        if(this._tail && this._tail.getDataTrip() === dataTrip){
+            this._tail = currentTail
+        }
+    }
+
+    costPriceKlientTrip(){  //суммарная стоимость поездок у клиента
+    let sum = 0
+    let pTemp = this._head.next
+        while(pTemp != null){
+            sum += Number(pTemp.getPriceTrip())
+            pTemp = pTemp.next
+        }
+        return sum
+    }
+
+    costCountKlientTrip(){  //суммарное кол-во поездок у клиента
+        let count = 0
+        let pTemp = this._head.next
+        while(pTemp != null){
+            count++
+            pTemp = pTemp.next
+        }
+        return count
+    }
+
+    getInfoKlient(){  //вывод информации об этом клиенте
+        let res = ''
+        let count = 0
+        let sum = 0
+        let pTemp = this._head.next
+        while(pTemp != null){
+            res += `Поездка ${pTemp.getDataTrip()} числа в ${pTemp.getTimeTrip()}:00\n`
+            count++
+            sum += pTemp.getPriceTrip()
+            pTemp = pTemp.next
+        }
+        return `\n${this._klientName}\n${res}Cуммарное количество поездок ${count}\nСуммарная стоимость поездок ${sum}\n`
+    }
+
+    searchTrip(dataTrip){  //поиск поездки у клиента
+        let pTemp = this._head.next
+        while(pTemp != null){
+            if(dataTrip === pTemp.getDataTrip()){
+                return pTemp
+            }
+            pTemp = pTemp.next
+        }
+    }
+
+    getHead(){  //метод доступа к заголовку
+        return this._head
+    }
+    hasKlient(){
+        if(this._head.next == null){
+            return false
+        }else{
+            return true
+        }
+    }
+    getTrips(){
+        let res = []
+        let i = 0
+        let pTemp = this._head.next
+        while(pTemp != null){
+            res[i] = pTemp
+            pTemp = pTemp.next
+            i++
+        }
+        return res
+    }
+    
+
+    chooseTrip(dataTrip){
+        let pTemp = this._head.next
+        while(pTemp != null){
+            if(pTemp.getDataTrip() == dataTrip){
+                return pTemp
+            }
+            pTemp = pTemp.next
+        }
+        return null
+    }
+}        
+
+
+
+
+
+
+
